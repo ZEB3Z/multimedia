@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ITCI231: Multimedia and Authoring</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --bg-primary: #0a0a0a;
@@ -18,7 +21,7 @@
       --glass-bg: rgba(20, 20, 20, 0.6);
       --glass-border: rgba(255, 255, 255, 0.08);
     }
-    
+
     * {
       margin: 0;
       padding: 0;
@@ -34,7 +37,10 @@
       scroll-behavior: smooth;
     }
 
-    h1, h2, h3, .nav-logo {
+    h1,
+    h2,
+    h3,
+    .nav-logo {
       font-family: 'Outfit', sans-serif;
     }
 
@@ -46,7 +52,8 @@
       height: 80px;
       padding: 0 5%;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
+      /* right-aligned since the logo is removed */
       align-items: center;
       background: var(--glass-bg);
       backdrop-filter: blur(12px);
@@ -54,16 +61,6 @@
       border-bottom: 1px solid var(--glass-border);
       z-index: 1000;
       transition: all 0.3s ease;
-    }
-
-    .nav-logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: -0.5px;
-      text-decoration: none;
     }
 
     .nav-links {
@@ -113,32 +110,13 @@
       position: relative;
     }
 
-    /* Hero */
-    #home {
-      text-align: center;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      padding: 0.5rem 1.2rem;
-      background: rgba(45, 212, 191, 0.1);
-      border: 1px solid rgba(45, 212, 191, 0.2);
-      border-radius: 50px;
-      color: var(--accent-2);
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      animation: fadeInDown 1s ease;
-    }
-
     .hero-title {
       font-size: clamp(3rem, 8vw, 5.5rem);
       font-weight: 800;
       line-height: 1.1;
       margin-bottom: 1.5rem;
       animation: fadeInUp 1s ease 0.2s both;
+      text-align: center;
     }
 
     .hero-title span {
@@ -153,6 +131,7 @@
       max-width: 600px;
       margin: 0 auto 3rem;
       animation: fadeInUp 1s ease 0.4s both;
+      text-align: center;
     }
 
     /* Cards */
@@ -184,14 +163,14 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at center, rgba(45,212,191,0.05) 0%, transparent 70%);
+      background: radial-gradient(circle at center, rgba(45, 212, 191, 0.05) 0%, transparent 70%);
       opacity: 0;
       transition: opacity 0.4s ease;
     }
 
     .card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       border-color: rgba(45, 212, 191, 0.3);
     }
 
@@ -252,6 +231,16 @@
       margin-top: 1rem;
     }
 
+    .footer-details {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #777;
+    }
+
     /* Ambient Background Effect */
     .ambient-glow {
       position: fixed;
@@ -260,70 +249,64 @@
       width: 50vw;
       height: 50vw;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(109,40,217,0.15) 0%, transparent 60%);
+      background: radial-gradient(circle, rgba(109, 40, 217, 0.15) 0%, transparent 60%);
       filter: blur(100px);
       z-index: -1;
       pointer-events: none;
     }
+
     .ambient-glow.right {
       top: 40%;
       left: auto;
       right: -10%;
-      background: radial-gradient(circle, rgba(45,212,191,0.1) 0%, transparent 60%);
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.1) 0%, transparent 60%);
     }
 
     /* Animations */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .nav-links {
-        display: none; /* Keep it simple for now, or you could add a hamburger menu */
+      .navbar {
+        justify-content: center;
       }
-      
+
       section {
         padding: 6rem 5% 3rem;
       }
     }
   </style>
 </head>
-<body>
+
+<body id="top">
 
   <div class="ambient-glow"></div>
   <div class="ambient-glow right"></div>
 
   <!-- Navigation -->
   <nav class="navbar">
-    <a href="#home" class="nav-logo">Portfolio.</a>
     <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
+      <li><a href="#top">Home</a></li>
       <li><a href="#blender">Blender</a></li>
       <li><a href="#rotoscoping">Rotoscoping</a></li>
     </ul>
   </nav>
 
-  <!-- Home Section -->
-  <section id="home">
-    <div class="hero-badge">Multimedia & Authoring</div>
-    <h1 class="hero-title">Creative <span>Journey</span></h1>
-    <p class="hero-subtitle">
-      Showcasing projects and milestones for ITCI231. 
-      Explore my works in 3D modeling and immersive visual effects.
-    </p>
-  </section>
-
-  <!-- Blender Section -->
+  <!-- Section 1: Blender -->
   <section id="blender">
-    <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 3.5rem);">3D with <span>Blender</span></h2>
+    <h2 class="hero-title">3D with <span>Blender</span></h2>
     <p class="hero-subtitle">Discover the realms of 3D modeling, texturing, lighting, and animation.</p>
-    
+
     <div class="card-container">
       <div class="card">
         <h3>Modeling</h3>
@@ -333,18 +316,14 @@
         <h3>Animation</h3>
         <p>Bringing still objects to life through keyframes and rigging.</p>
       </div>
-      <div class="card">
-        <h3>Lighting</h3>
-        <p>Setting the mood and atmosphere with advanced lighting setups.</p>
-      </div>
     </div>
   </section>
 
-  <!-- Rotoscoping Section -->
+  <!-- Section 2: Rotoscoping -->
   <section id="rotoscoping">
-    <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 3.5rem);">VFX <span>Rotoscoping</span></h2>
+    <h2 class="hero-title">VFX <span>Rotoscoping</span></h2>
     <p class="hero-subtitle">Precision matte creation for seamless visual effects integration.</p>
-    
+
     <div class="card-container">
       <div class="card">
         <h3>Masking</h3>
@@ -361,7 +340,15 @@
   <footer>
     <div class="footer-course">This landing page is for the course of "ITCI231: Multimedia and Authoring"</div>
     <div class="footer-author">Made by Ericksson Brutas of BSIT-S-2A</div>
-    <div class="footer-institution">TUP-TAGUIG</div>
+    <div class="footer-institution">Technological University of the Philippines - Taguig (TUP-TAGUIG)</div>
+
+    <div class="footer-details">
+      <span>Academic Year 2026-2027</span>
+      <span>•</span>
+      <span>Department of Computer Studies</span>
+      <span>•</span>
+      <span>Student Project Showcase</span>
+    </div>
   </footer>
 
   <script>
@@ -399,4 +386,5 @@
     });
   </script>
 </body>
+
 </html>
