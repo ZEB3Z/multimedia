@@ -98,6 +98,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
         }
 
         .page-title {
@@ -105,6 +106,7 @@
             margin-bottom: 1rem;
             color: var(--accent-2);
             filter: brightness(1.1);
+            text-align: center;
         }
 
         .page-subtitle {
@@ -112,34 +114,17 @@
             font-size: 1.2rem;
             max-width: 600px;
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
         }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .grid-item {
-            background: var(--bg-secondary);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 2.5rem;
-            transition: transform 0.3s;
-        }
-
-        .grid-item:hover {
-            transform: translateY(-5px);
-            border-color: rgba(45, 212, 191, 0.4);
-        }
-
-        .grid-item h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #fff;
+        .empty-state {
+            padding: 3rem;
+            border: 1px dashed var(--glass-border);
+            border-radius: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin-top: 2rem;
         }
 
         footer {
@@ -211,17 +196,10 @@
         <p class="page-subtitle">Exploring 3D space, organic procedural materials, geometric modeling, and rendering.
         </p>
 
-        <div class="grid-container">
-            <div class="grid-item">
-                <h3>Project 1: Hard Surface Model</h3>
-                <p style="color: var(--text-muted);">Showcasing non-subdivision modeling strategies for robotic parts.
-                </p>
-            </div>
-            <div class="grid-item">
-                <h3>Project 2: Rendered Environment</h3>
-                <p style="color: var(--text-muted);">Atmospheric environment using volumetric lighting and particle
-                    simulations.</p>
-            </div>
+        <div class="empty-state">
+            <h3>No tasks assigned yet</h3>
+            <p style="margin-top: 1rem; font-size: 0.95rem;">Check back later to see my upcoming 3D creations, ranging
+                from hard-surface models to vivid rendered environments.</p>
         </div>
     </div>
 
