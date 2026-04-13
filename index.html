@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaude</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f9f6f0;
+      color: #1a1a1a;
+      overflow-x: hidden;
+    }
+
+    .section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      position: relative;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      margin-bottom: 1rem;
+      color: #111;
+      transition: transform 0.6s ease, opacity 0.6s ease, color 0.6s ease;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: #555;
+      max-width: 500px;
+      line-height: 1.6;
+      text-align: center;
+      margin-bottom: 2rem;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+    }
+
+    button {
+      padding: 0.85rem 2rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 50px;
+      background: #d97742;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      background: #c4673a;
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(217, 119, 66, 0.4);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      color: #999;
+      font-size: 0.9rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    /* Shapes */
+    .scene {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 2rem 0;
+    }
+
+    .shape {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 0.8s ease, width 0.8s ease, height 0.8s ease, border-radius 0.8s ease, background 0.8s ease;
+    }
+
+    /* Section 2 shapes */
+    .scene-2 .shape-1 {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #d97742;
+    }
+
+    .scene-2 .shape-2 {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(217, 119, 66, 0.3);
+    }
+
+    .scene-2 .shape-3 {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: none;
+      border: 3px solid #d97742;
+    }
+
+    .scene-2.in-view .shape-1 { transform: translate(-50%, -50%) rotate(45deg) scale(1.1); border-radius: 12px; background: #c4673a; }
+    .scene-2.in-view .shape-2 { transform: translate(-30%, -30%) scale(1.3) rotate(-20deg); }
+    .scene-2.in-view .shape-3 { transform: translate(-50%, -50%) scale(1.2); border-radius: 20px; }
+
+    /* Section 3 shapes */
+    .scene-3 .shape-row {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .scene-3 .shape-4 {
+      width: 100px;
+      height: 100px;
+      background: #d97742;
+      border-radius: 8px;
+    }
+
+    .scene-3 .shape-5 {
+      width: 140px;
+      height: 140px;
+      border: 4px solid #d97742;
+      border-radius: 50%;
+    }
+
+    .scene-3 .shape-6 {
+      width: 100px;
+      height: 100px;
+      background: rgba(217, 119, 66, 0.3);
+      border-radius: 8px;
+    }
+
+    .scene-3.in-view .shape-4 { transform: rotate(180deg) scale(0.9); border-radius: 50%; }
+    .scene-3.in-view .shape-5 { transform: scale(1.1); border-color: #c4673a; border-width: 6px; }
+    .scene-3.in-view .shape-6 { transform: rotate(-135deg) translateY(-10px); border-radius: 50%; }
+
+    /* Section 4 - morphing shape */
+    .scene-4 .morph {
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, #d97742, #f0a06b);
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      animation: morph 6s ease-in-out infinite;
+    }
+
+    @keyframes morph {
+      0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+      25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+      50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+      75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+    }
+
+    .scene-4.in-view .morph {
+      animation: morph-spin 3s ease-in-out infinite;
+      transform: scale(1.2);
+    }
+
+    @keyframes morph-spin {
+      0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: scale(1.2) rotate(0deg); }
+      50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; transform: scale(1.3) rotate(180deg); }
+      100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: scale(1.2) rotate(360deg); }
+    }
+
+    /* Reveal animation */
+    .section > * {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .section.in-view > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section.in-view > *:nth-child(1) { transition-delay: 0s; }
+    .section.in-view > *:nth-child(2) { transition-delay: 0.15s; }
+    .section.in-view > *:nth-child(3) { transition-delay: 0.3s; }
+    .section.in-view > *:nth-child(4) { transition-delay: 0.45s; }
+    .section.in-view > *:nth-child(5) { transition-delay: 0.6s; }
+
+    /* Progress bar */
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: #d97742;
+      width: 0%;
+      z-index: 10;
+      transition: width 0.1s linear;
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+
+  <!-- Section 1: Hero -->
+  <section class="section" id="hero">
+    <h1 id="heading">OpenClaude Works!</h1>
+    <p class="subtitle" id="subtitle">A simple page that comes alive as you scroll. Watch shapes morph, text shift, and colors flow.</p>
+    <button id="cta-btn">Click Me</button>
+    <span class="scroll-hint">↓ scroll down</span>
+  </section>
+
+  <!-- Section 2: Concentric shapes -->
+  <section class="section">
+    <h2 id="heading-2">Watch Them Shift</h2>
+    <div class="scene scene-2" id="scene-2">
+      <div class="shape shape-3"></div>
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+    </div>
+    <p class="subtitle" id="text-2">Circles square off. The outline stretches while the center transforms.</p>
+  </section>
+
+  <!-- Section 3: Shape row -->
+  <section class="section">
+    <h2 id="heading-3">They Dance Together</h2>
+    <div class="scene scene-3" id="scene-3">
+      <div class="shape-row">
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+        <div class="shape shape-6"></div>
+      </div>
+    </div>
+    <p class="subtitle" id="text-3">Squares round up. Rings grow. The rhythm changes with your scroll.</p>
+  </section>
+
+  <!-- Section 4: Morphing blob -->
+  <section class="section">
+    <div class="scene scene-4" id="scene-4">
+      <div class="shape morph"></div>
+    </div>
+    <h2 id="heading-4">And Breathe Forever</h2>
+    <p class="subtitle" id="text-4">The final shape — an organic form that pulses with its own energy.</p>
+    <button onclick="document.getElementById('hero').scrollIntoView({behavior: 'smooth'})">Back to Top</button>
+  </section>
+
+  <script>
+    // Scroll progress
+    window.addEventListener('scroll', () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = (window.scrollY / height) * 100;
+      document.getElementById('progress').style.width = pct + '%';
+    });
+
+    // Intersection observer for reveal animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        entry.target.classList.toggle('in-view', entry.isIntersecting);
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.section, .scene-2, .scene-3, .scene-4').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Dynamic heading that changes with scroll
+    const phrases = [
+      'OpenClaude Works!',
+      'Shapes Shift',
+      'Text Transforms',
+      'Still Alive'
+    ];
+
+    const heading = document.getElementById('heading');
+    const sub2 = document.getElementById('heading-2');
+    const sub3 = document.getElementById('heading-3');
+    const sub4 = document.getElementById('heading-4');
+
+    // Parallax on hero
+    window.addEventListener('scroll', () => {
+      const offset = window.scrollY;
+      heading.style.transform = `translateY(${offset * 0.15}px)`;
+      heading.style.opacity = Math.max(0, 1 - offset / 500);
+    });
+
+    // Click handler
+    document.getElementById('cta-btn').addEventListener('click', () => {
+      alert('Hello from OpenClaude!');
+    });
+  </script>
+</body>
+</html>
