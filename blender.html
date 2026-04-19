@@ -127,6 +127,126 @@
             margin-top: 2rem;
         }
 
+        /* Video Section */
+        .video-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            height: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .video-title {
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .video-credits {
+            font-size: 0.95rem;
+            color: var(--accent-2);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .video-description {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            border-left: 3px solid var(--accent-1);
+            padding-left: 1.5rem;
+        }
+
+        .feature-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            flex-wrap: wrap;
+        }
+
+        .feature-image-col {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .feature-image-col img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+        }
+
+        .feature-label {
+            color: var(--accent-2);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .feature-text-col {
+            flex: 1.5;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            border-left: 3px solid var(--accent-1);
+            padding-left: 1.5rem;
+        }
+
         footer {
             background: #050505;
             padding: 4rem 5%;
@@ -196,9 +316,41 @@
         <p class="page-subtitle">Exploring 3D space, organic procedural materials, geometric modeling, and rendering.
         </p>
 
-        <div class="empty-state">
-            <h3>No tasks assigned yet</h3>
-            <p style="margin-top: 1rem; font-size: 0.95rem;"></p>
+        <div class="video-section">
+            <div class="video-info">
+                <h2 class="video-title">The Solar System</h2>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/bYyvK98NCW0?si=Ojte4VuMnAls6yDT"
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+
+            <div class="video-description">
+                <p>The solar system is the gravitationally bound system of the Sun and the objects that orbit it. This
+                    animated sequence visualizes our celestial neighborhood, created entirely in Blender with 3D
+                    modeling, texturing, and animation tools.</p>
+            </div>
+        </div>
+
+        <!-- Sun Feature Section -->
+        <div class="feature-section">
+            <div class="feature-image-col">
+                <img src="resources/sun.gif" alt="The Sun created in Blender">
+                <div class="feature-label">The Sun - 3D Render</div>
+            </div>
+
+            <div class="feature-text-col">
+                <h2 class="feature-title">The Sun</h2>
+                <div class="feature-description">
+                    <p>The Sun is the star at the center of the Solar System. It is a nearly perfect sphere of hot
+                        plasma, heated to incandescence by nuclear fusion reactions in its core. This 3D representation
+                        highlights the dynamic flares and procedural textures used to simulate its volatile surface in
+                        Blender.</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -208,7 +360,7 @@
         <div class="footer-institution">Technological University of the Philippines - Taguig (TUP-TAGUIG)</div>
         <div class="footer-details">
             <span>Academic Year 2025-2026</span><span>•</span><span>College of
-                Engineering</span><span>•</span><span>Student Project Showcase</span>
+                Engineering Technology</span><span>•</span><span>Student Project Showcase</span>
         </div>
     </footer>
 
