@@ -299,29 +299,109 @@
             color: #777;
         }
 
+        /* ── Age Calculator ── */
         .calculator-section {
+            position: relative;
             flex-direction: column;
-            gap: 2rem;
-            align-items: stretch;
+            gap: 2.5rem;
+            align-items: center;
+            overflow: hidden;
+            padding: 3.5rem 3rem;
         }
 
-        .age-input-container input:focus {
+        /* starfield background */
+        .calculator-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.35) 0%, transparent 100%),
+                radial-gradient(1px 1px at 30% 65%, rgba(255, 255, 255, 0.25) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 55% 15%, rgba(255, 255, 255, 0.4) 0%, transparent 100%),
+                radial-gradient(1px 1px at 70% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 100%),
+                radial-gradient(1px 1px at 85% 40%, rgba(255, 255, 255, 0.3) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 20% 85%, rgba(255, 255, 255, 0.35) 0%, transparent 100%),
+                radial-gradient(1px 1px at 45% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 100%),
+                radial-gradient(1px 1px at 90% 10%, rgba(255, 255, 255, 0.25) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 5% 55%, rgba(255, 255, 255, 0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 60% 35%, rgba(255, 255, 255, 0.2) 0%, transparent 100%),
+                radial-gradient(1px 1px at 75% 60%, rgba(255, 255, 255, 0.15) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 40% 90%, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .calculator-section>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .calc-header {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .calc-header .feature-title {
+            margin-bottom: 0.8rem;
+        }
+
+        .calc-header .feature-description {
+            border: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* pill input */
+        .age-input-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .age-input-wrap label {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: var(--accent-2);
+        }
+
+        .age-input-wrap input {
+            padding: 0.75rem 2rem;
+            font-size: 1.25rem;
+            border-radius: 50px;
+            border: 2px solid rgba(109, 40, 217, 0.35);
+            background: rgba(10, 10, 10, 0.8);
+            color: #fff;
+            outline: none;
+            width: 160px;
+            text-align: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .age-input-wrap input:focus {
             border-color: var(--accent-1);
-            box-shadow: 0 0 12px rgba(109, 40, 217, 0.4);
+            box-shadow: 0 0 18px rgba(109, 40, 217, 0.45), 0 0 40px rgba(109, 40, 217, 0.15);
         }
 
+        /* grid – 4 columns, centered */
         .planets-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
             width: 100%;
-            margin-top: 1rem;
+            max-width: 680px;
+            justify-items: center;
         }
 
+        /* animations */
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(12px);
+                transform: translateY(14px);
             }
 
             to {
@@ -330,23 +410,38 @@
             }
         }
 
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                box-shadow: 0 0 12px var(--planet-glow, transparent), 0 8px 25px rgba(0, 0, 0, 0.35);
+            }
+
+            50% {
+                box-shadow: 0 0 24px var(--planet-glow, transparent), 0 8px 30px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        /* cards */
         .planet-card {
-            background: rgba(18, 18, 18, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(14, 14, 14, 0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--glass-border);
-            border-radius: 14px;
-            padding: 1.8rem 1rem 1.5rem;
+            border-radius: 16px;
+            padding: 1.8rem 1rem 1.4rem;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
             transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
 
+        /* gradient top border */
         .planet-card::before {
             content: '';
             position: absolute;
@@ -354,22 +449,27 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: var(--planet-color, var(--accent-2));
-            opacity: 0.6;
+            background: linear-gradient(90deg, transparent, var(--planet-color, var(--accent-2)), transparent);
+            opacity: 0.7;
             transition: opacity 0.3s;
         }
 
         .planet-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px var(--planet-glow, transparent);
             border-color: var(--planet-color, var(--accent-1));
+            animation: shimmer 2s ease-in-out infinite;
         }
 
         .planet-card:hover::before {
             opacity: 1;
         }
 
-        /* Per-planet colors */
+        /* per-planet palette */
+        .planet-card[data-planet="earth"] {
+            --planet-color: #4facfe;
+            --planet-glow: rgba(79, 172, 254, 0.2);
+        }
+
         .planet-card[data-planet="mercury"] {
             --planet-color: #b0b0b0;
             --planet-glow: rgba(176, 176, 176, 0.15);
@@ -405,36 +505,47 @@
             --planet-glow: rgba(79, 124, 247, 0.2);
         }
 
+        /* emoji glow */
         .planet-icon {
-            font-size: 2.4rem;
-            margin-bottom: 0.2rem;
+            font-size: 2.6rem;
             line-height: 1;
+            filter: drop-shadow(0 0 8px var(--planet-glow, transparent));
+            transition: filter 0.3s;
+        }
+
+        .planet-card:hover .planet-icon {
+            filter: drop-shadow(0 0 14px var(--planet-glow, transparent));
         }
 
         .planet-symbol {
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             color: var(--planet-color, var(--text-muted));
-            opacity: 0.7;
-            font-weight: 600;
+            opacity: 0.6;
+            font-weight: 700;
         }
 
         .planet-name {
             font-family: 'Outfit', sans-serif;
-            font-weight: 600;
+            font-weight: 800;
             color: var(--planet-color, var(--accent-2));
-            font-size: 1.05rem;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .planet-age {
-            font-size: 1.15rem;
-            font-weight: 500;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
             color: var(--text-muted);
-            min-height: 1.5em;
+            min-height: 1.6em;
+            transition: color 0.3s;
         }
 
         .planet-age.active {
             animation: slideUp 0.4s ease forwards;
-            color: var(--text-main);
+            color: #fff;
+            text-shadow: 0 0 12px var(--planet-glow, transparent);
         }
     </style>
 </head>
@@ -511,22 +622,24 @@
 
         <!-- Age Calculator Section -->
         <div class="feature-section calculator-section">
-            <div style="width: 100%; text-align: center; margin-bottom: 1rem;">
+            <div class="calc-header">
                 <h2 class="feature-title">Your Age on Different Planets</h2>
-                <p class="feature-description"
-                    style="border: none; padding: 0; max-width: 600px; margin: 0 auto; text-align: center;">Enter your
-                    Earth age below to see how old you would be if you lived on other planets in our Solar System!</p>
-
-                <div class="age-input-container" style="margin-top: 2rem;">
-                    <label for="earth-age"
-                        style="font-weight: 500; font-size: 1.2rem; color: var(--accent-2); margin-right: 1rem;">Earth
-                        Age:</label>
-                    <input type="number" id="earth-age" min="0" max="1000" placeholder="e.g. 20"
-                        style="padding: 0.8rem 1.5rem; font-size: 1.2rem; border-radius: 8px; border: 1px solid var(--glass-border); background: var(--bg-primary); color: #fff; outline: none; transition: border-color 0.3s; width: 150px; text-align: center; font-family: 'Inter', sans-serif;">
+                <p class="feature-description">Enter your Earth age below to discover how old you'd be across our Solar
+                    System.</p>
+                <div class="age-input-wrap">
+                    <label for="earth-age">Earth Age</label>
+                    <input type="number" id="earth-age" min="0" max="1000" placeholder="e.g. 20">
                 </div>
             </div>
 
             <div class="planets-grid">
+                <!-- Earth (row 1) -->
+                <div class="planet-card" data-period="1" data-planet="earth">
+                    <div class="planet-icon">🌍</div>
+                    <div class="planet-symbol">⊕</div>
+                    <div class="planet-name">Earth</div>
+                    <div class="planet-age">--</div>
+                </div>
                 <div class="planet-card" data-period="0.24" data-planet="mercury">
                     <div class="planet-icon">🌑</div>
                     <div class="planet-symbol">☿</div>
@@ -545,6 +658,7 @@
                     <div class="planet-name">Mars</div>
                     <div class="planet-age">--</div>
                 </div>
+                <!-- Row 2 -->
                 <div class="planet-card" data-period="11.86" data-planet="jupiter">
                     <div class="planet-icon">🟠</div>
                     <div class="planet-symbol">♃</div>
@@ -585,11 +699,10 @@
 
                     if (!isNaN(earthAge) && earthAge > 0) {
                         const planetAge = (earthAge / period).toFixed(1);
-                        // Reset animation
                         ageDisplay.classList.remove('active');
-                        void ageDisplay.offsetWidth; // trigger reflow
+                        void ageDisplay.offsetWidth;
                         ageDisplay.textContent = planetAge + ' years';
-                        ageDisplay.style.animationDelay = (index * 0.06) + 's';
+                        ageDisplay.style.animationDelay = (index * 0.07) + 's';
                         ageDisplay.classList.add('active');
                     } else {
                         ageDisplay.classList.remove('active');
