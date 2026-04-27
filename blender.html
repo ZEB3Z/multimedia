@@ -307,6 +307,7 @@
 
         .age-input-container input:focus {
             border-color: var(--accent-1);
+            box-shadow: 0 0 12px rgba(109, 40, 217, 0.4);
         }
 
         .planets-grid {
@@ -317,40 +318,123 @@
             margin-top: 1rem;
         }
 
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .planet-card {
-            background: var(--bg-primary);
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 1.5rem 1rem;
+            border-radius: 14px;
+            padding: 1.8rem 1rem 1.5rem;
             text-align: center;
             display: flex;
             flex-direction: column;
-            gap: 0.8rem;
-            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            align-items: center;
+            gap: 0.6rem;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .planet-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--planet-color, var(--accent-2));
+            opacity: 0.6;
+            transition: opacity 0.3s;
         }
 
         .planet-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: var(--accent-1);
+            transform: translateY(-6px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px var(--planet-glow, transparent);
+            border-color: var(--planet-color, var(--accent-1));
+        }
+
+        .planet-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Per-planet colors */
+        .planet-card[data-planet="mercury"] {
+            --planet-color: #b0b0b0;
+            --planet-glow: rgba(176, 176, 176, 0.15);
+        }
+
+        .planet-card[data-planet="venus"] {
+            --planet-color: #e8cda0;
+            --planet-glow: rgba(232, 205, 160, 0.15);
+        }
+
+        .planet-card[data-planet="mars"] {
+            --planet-color: #e05a3a;
+            --planet-glow: rgba(224, 90, 58, 0.2);
+        }
+
+        .planet-card[data-planet="jupiter"] {
+            --planet-color: #d4a44a;
+            --planet-glow: rgba(212, 164, 74, 0.2);
+        }
+
+        .planet-card[data-planet="saturn"] {
+            --planet-color: #e8c872;
+            --planet-glow: rgba(232, 200, 114, 0.2);
+        }
+
+        .planet-card[data-planet="uranus"] {
+            --planet-color: #7de3e3;
+            --planet-glow: rgba(125, 227, 227, 0.15);
+        }
+
+        .planet-card[data-planet="neptune"] {
+            --planet-color: #4f7cf7;
+            --planet-glow: rgba(79, 124, 247, 0.2);
         }
 
         .planet-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.4rem;
+            margin-bottom: 0.2rem;
+            line-height: 1;
+        }
+
+        .planet-symbol {
+            font-size: 1.4rem;
+            color: var(--planet-color, var(--text-muted));
+            opacity: 0.7;
+            font-weight: 600;
         }
 
         .planet-name {
             font-family: 'Outfit', sans-serif;
             font-weight: 600;
-            color: var(--accent-2);
-            font-size: 1.1rem;
+            color: var(--planet-color, var(--accent-2));
+            font-size: 1.05rem;
         }
 
         .planet-age {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 500;
             color: var(--text-muted);
+            min-height: 1.5em;
+        }
+
+        .planet-age.active {
+            animation: slideUp 0.4s ease forwards;
+            color: var(--text-main);
         }
     </style>
 </head>
@@ -443,38 +527,45 @@
             </div>
 
             <div class="planets-grid">
-                <div class="planet-card" data-period="0.24">
+                <div class="planet-card" data-period="0.24" data-planet="mercury">
                     <div class="planet-icon">🌑</div>
+                    <div class="planet-symbol">☿</div>
                     <div class="planet-name">Mercury</div>
                     <div class="planet-age">--</div>
                 </div>
-                <div class="planet-card" data-period="0.615">
+                <div class="planet-card" data-period="0.615" data-planet="venus">
                     <div class="planet-icon">🌕</div>
+                    <div class="planet-symbol">♀</div>
                     <div class="planet-name">Venus</div>
                     <div class="planet-age">--</div>
                 </div>
-                <div class="planet-card" data-period="1.88">
+                <div class="planet-card" data-period="1.88" data-planet="mars">
                     <div class="planet-icon">🔴</div>
+                    <div class="planet-symbol">♂</div>
                     <div class="planet-name">Mars</div>
                     <div class="planet-age">--</div>
                 </div>
-                <div class="planet-card" data-period="11.86">
+                <div class="planet-card" data-period="11.86" data-planet="jupiter">
                     <div class="planet-icon">🟠</div>
+                    <div class="planet-symbol">♃</div>
                     <div class="planet-name">Jupiter</div>
                     <div class="planet-age">--</div>
                 </div>
-                <div class="planet-card" data-period="29.46">
+                <div class="planet-card" data-period="29.46" data-planet="saturn">
                     <div class="planet-icon">🪐</div>
+                    <div class="planet-symbol">♄</div>
                     <div class="planet-name">Saturn</div>
                     <div class="planet-age">--</div>
                 </div>
-                <div class="planet-card" data-period="84.01">
+                <div class="planet-card" data-period="84.01" data-planet="uranus">
                     <div class="planet-icon">🌐</div>
+                    <div class="planet-symbol">♅</div>
                     <div class="planet-name">Uranus</div>
                     <div class="planet-age">--</div>
                 </div>
-                <div class="planet-card" data-period="164.79">
+                <div class="planet-card" data-period="164.79" data-planet="neptune">
                     <div class="planet-icon">🔵</div>
+                    <div class="planet-symbol">♆</div>
                     <div class="planet-name">Neptune</div>
                     <div class="planet-age">--</div>
                 </div>
@@ -488,17 +579,21 @@
             earthAgeInput.addEventListener('input', (e) => {
                 const earthAge = parseFloat(e.target.value);
 
-                planetCards.forEach(card => {
+                planetCards.forEach((card, index) => {
                     const period = parseFloat(card.getAttribute('data-period'));
                     const ageDisplay = card.querySelector('.planet-age');
 
                     if (!isNaN(earthAge) && earthAge > 0) {
                         const planetAge = (earthAge / period).toFixed(1);
-                        ageDisplay.textContent = planetAge + " years";
-                        ageDisplay.style.color = "var(--text-main)";
+                        // Reset animation
+                        ageDisplay.classList.remove('active');
+                        void ageDisplay.offsetWidth; // trigger reflow
+                        ageDisplay.textContent = planetAge + ' years';
+                        ageDisplay.style.animationDelay = (index * 0.06) + 's';
+                        ageDisplay.classList.add('active');
                     } else {
-                        ageDisplay.textContent = "--";
-                        ageDisplay.style.color = "var(--text-muted)";
+                        ageDisplay.classList.remove('active');
+                        ageDisplay.textContent = '--';
                     }
                 });
             });
