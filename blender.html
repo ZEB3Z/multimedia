@@ -513,6 +513,14 @@
             transition: filter 0.3s;
         }
 
+        .planet-icon img {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+        }
+
         .planet-card:hover .planet-icon {
             filter: drop-shadow(0 0 14px var(--planet-glow, transparent));
         }
@@ -707,25 +715,25 @@
             <div class="planets-grid">
                 <!-- Earth (row 1) -->
                 <div class="planet-card" data-period="1" data-planet="earth">
-                    <div class="planet-icon">🌍</div>
+                    <div class="planet-icon"><img src="resources/earth.gif" alt="Earth"></div>
                     <div class="planet-symbol">⊕</div>
                     <div class="planet-name">Earth</div>
                     <div class="planet-age">--</div>
                 </div>
                 <div class="planet-card" data-period="0.24" data-planet="mercury">
-                    <div class="planet-icon">🌑</div>
+                    <div class="planet-icon"><img src="resources/mercury.gif" alt="Mercury"></div>
                     <div class="planet-symbol">☿</div>
                     <div class="planet-name">Mercury</div>
                     <div class="planet-age">--</div>
                 </div>
                 <div class="planet-card" data-period="0.615" data-planet="venus">
-                    <div class="planet-icon">🌕</div>
+                    <div class="planet-icon"><img src="resources/venus.gif" alt="Venus"></div>
                     <div class="planet-symbol">♀</div>
                     <div class="planet-name">Venus</div>
                     <div class="planet-age">--</div>
                 </div>
                 <div class="planet-card" data-period="1.88" data-planet="mars">
-                    <div class="planet-icon">🔴</div>
+                    <div class="planet-icon"><img src="resources/mars.gif" alt="Mars"></div>
                     <div class="planet-symbol">♂</div>
                     <div class="planet-name">Mars</div>
                     <div class="planet-age">--</div>
