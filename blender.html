@@ -505,6 +505,11 @@
             --planet-glow: rgba(79, 124, 247, 0.2);
         }
 
+        .planet-card[data-planet="pluto"] {
+            --planet-color: #c4a8d8;
+            --planet-glow: rgba(196, 168, 216, 0.2);
+        }
+
         /* emoji glow */
         .planet-icon {
             font-size: 2.6rem;
@@ -763,10 +768,18 @@
                     <div class="planet-name">Neptune</div>
                     <div class="planet-age">--</div>
                 </div>
+                <div class="planet-card" data-period="247.94" data-planet="pluto">
+                    <div class="planet-icon">❄️</div>
+                    <div class="planet-symbol">♇</div>
+                    <div class="planet-name">Pluto</div>
+                    <div class="planet-age">--</div>
+                </div>
             </div>
         </div>
 
         <script>
+            /* jshint esversion: 6 */
+            
             const earthAgeInput = document.getElementById('earth-age');
             const planetCards = document.querySelectorAll('.planet-card');
 
