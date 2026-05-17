@@ -214,6 +214,8 @@
         .feature-image-col img {
             width: 100%;
             max-width: 400px;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             border: 1px solid var(--glass-border);
@@ -633,23 +635,6 @@
             </div>
         </div>
 
-        <div class="video-section">
-            <div class="video-info">
-                <h2 class="video-title">Solar System Isometric View - Week 1 progress</h2>
-            </div>
-
-            <div class="video-wrapper">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/z8657xquwFA"
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
-            </div>
-
-            <div class="video-description">
-                <p>For week 1 i modeled the sun and the first 5 planets, also i set up the camera for the sun and now im
-                    currently working on setting up the camera for the planets</p>
-            </div>
-        </div>
 
         <!-- Sun Feature Section -->
         <div class="feature-section">
@@ -804,6 +789,38 @@
             </div>
         </div>
 
+        <!-- Neptune Feature Section -->
+        <div class="feature-section">
+            <div class="feature-image-col">
+                <img src="resources/neptune.gif" alt="Neptune created in Blender">
+                <div class="feature-label">Neptune - 3D Render</div>
+            </div>
+
+            <div class="feature-text-col">
+                <h2 class="feature-title">Neptune</h2>
+                <div class="feature-description">
+                    <p>Neptune is the eighth and farthest known planet from the Sun in our Solar System. This dark, cold ice giant is swept by supersonic winds — the fastest in the Solar System — reaching speeds over 2,000 km/h. Its vivid blue color results from methane in its atmosphere absorbing red wavelengths. This Blender render captures Neptune's deep azure hue and dynamic atmospheric features with procedural shading.</p>
+                </div>
+                <a href="scripts/neptune.py" download class="download-btn"><svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>Download Script</a>
+            </div>
+        </div>
+
+        <!-- Pluto Feature Section -->
+        <div class="feature-section">
+            <div class="feature-image-col">
+                <img src="resources/pluto.gif" alt="Pluto created in Blender">
+                <div class="feature-label">Pluto - 3D Render</div>
+            </div>
+
+            <div class="feature-text-col">
+                <h2 class="feature-title">Pluto</h2>
+                <div class="feature-description">
+                    <p>Pluto is a dwarf planet in the Kuiper belt, once considered the ninth planet of our Solar System. Despite its reclassification, Pluto remains a fascinating world with a heart-shaped nitrogen ice plain, towering ice mountains, and a thin atmosphere that freezes and collapses as it moves away from the Sun. This Blender render showcases its icy, reddish-brown surface and distant, frigid beauty.</p>
+                </div>
+                <a href="scripts/pluto.py" download class="download-btn"><svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>Download Script</a>
+            </div>
+        </div>
+
         <!-- Age Calculator Section -->
         <div class="feature-section calculator-section">
             <div class="calc-header">
@@ -862,13 +879,13 @@
                     <div class="planet-age">--</div>
                 </div>
                 <div class="planet-card" data-period="164.79" data-planet="neptune">
-                    <div class="planet-icon">🔵</div>
+                    <div class="planet-icon"><img src="resources/neptune.gif" alt="Neptune"></div>
                     <div class="planet-symbol">♆</div>
                     <div class="planet-name">Neptune</div>
                     <div class="planet-age">--</div>
                 </div>
                 <div class="planet-card" data-period="247.94" data-planet="pluto">
-                    <div class="planet-icon">❄️</div>
+                    <div class="planet-icon"><img src="resources/pluto.gif" alt="Pluto"></div>
                     <div class="planet-symbol">♇</div>
                     <div class="planet-name">Pluto</div>
                     <div class="planet-age">--</div>
